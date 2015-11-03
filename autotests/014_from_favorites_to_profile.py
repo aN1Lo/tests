@@ -6,7 +6,7 @@ from appium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 
 f = open('tests.log', 'a')
-print('\n%s executing...' % __name__[10:])
+print('\x1b[33m\n%s executing...\x1b[0m' % __name__[10:])
 f.write('\n%s executing...\n' % __name__[10:])
 f.flush()
 
@@ -25,64 +25,73 @@ class User:
     #     self.instagram = instagram1
 
 
-def is_there(driver, id_str):
+def is_there(driver, id_str, auth):
     try:
         driver.find_element_by_id(id_str)
-        print('There is ' + id_str)
-        f.write('There is ' + id_str + '\n')
+        if auth:
+            print('\x1b[36mThere is %s\x1b[0m' % id_str)
+        else:
+            print('There is %s' % id_str)
+        f.write('There is %s\n' % id_str)
         f.flush()
         return True
     except NoSuchElementException:
-        print('Error: There is no ' + id_str)
-        f.write('Error: There is no ' + id_str + '\n')
+        if auth:
+            print('\x1b[36mError: There is no %s\x1b[0m' % id_str)
+        else:
+            print('\x1b[31mError: There is no %s\x1b[0m' % id_str)
+        f.write('Error: There is no %s\n' % id_str)
         f.flush()
         return False
 
 
-def is_there_by_xpath(driver, xpath_str):
+def is_there_by_xpath(driver, xpath_str, auth):
     try:
         driver.find_element_by_xpath(xpath_str)
-        print('There is ' + xpath_str)
-        f.write('There is ' + xpath_str + '\n')
+        if auth:
+            print('\x1b[36mThere is %s\x1b[0m' % xpath_str)
+        else:
+            print('There is %s' % xpath_str)
+        f.write('There is %s\n' % xpath_str)
         f.flush()
         return True
     except NoSuchElementException:
-        print('Error: There is no ' + xpath_str)
-        f.write('Error: There is no ' + xpath_str + '\n')
+        if auth:
+            print('\x1b[36mError: There is no %s\x1b[0m' % xpath_str)
+        else:
+            print('\x1b[31mError: There is no %s\x1b[0m' % xpath_str)
+        f.write('Error: There is no %s\n' % xpath_str)
         f.flush()
         return False
 
 
 def authorization(driver, login, passwd):
-    print('Authorizating...')
+    print('\x1b[33mAuthorizating...\x1b[0m')
     f.write('Authorizating...\n')
-    f.flush()
     global flag_auth
-    if is_there_by_xpath(driver, '//android.widget.ImageButton[@text=\'\']'):
+    if is_there_by_xpath(driver, '//android.widget.ImageButton[@text=\'\']', True):
         driver.find_element_by_xpath('//android.widget.ImageButton[@text=\'\']').click()
-        if is_there(driver, 'ru.gigme.android.app:id/material_drawer_account_header_current'):
-            print('Already authorized.')
+        if is_there(driver, 'ru.gigme.android.app:id/material_drawer_account_header_current', True):
+            print('\x1b[33mAlready authorized.\x1b[0m')
             f.write('Already authorized.\n')
-            f.flush()
             flag_auth = True
             return True
         else:
-            if is_there_by_xpath(driver, u'//android.widget.TextView[@text=\'Настройки\']'):
+            if is_there_by_xpath(driver, u'//android.widget.TextView[@text=\'Настройки\']', True):
                 driver.find_element_by_xpath(u'//android.widget.TextView[@text=\'Настройки\']').click()
                 time.sleep(1)
-                if is_there(driver, 'ru.gigme.android.app:id/person_name'):
+                if is_there(driver, 'ru.gigme.android.app:id/person_name', True):
                     driver.find_element_by_id('ru.gigme.android.app:id/person_name').send_keys(login)
-                    if is_there(driver, 'ru.gigme.android.app:id/password'):
+                    if is_there(driver, 'ru.gigme.android.app:id/password', True):
                         driver.find_element_by_id('ru.gigme.android.app:id/password').send_keys(passwd)
-                        if is_there(driver, 'ru.gigme.android.app:id/login_button'):
+                        if is_there(driver, 'ru.gigme.android.app:id/login_button', True):
                             driver.find_element_by_id('ru.gigme.android.app:id/login_button').click()
                             time.sleep(1)
-                            if is_there_by_xpath(driver, '//android.widget.ImageButton[@text=\'\']'):
+                            if is_there_by_xpath(driver, '//android.widget.ImageButton[@text=\'\']', True):
                                 driver.find_element_by_xpath('//android.widget.ImageButton[@text=\'\']').click()
                                 flag_auth = False
-                                print('Logged on.')
+                                print('\x1b[33mLogged on.\x1b[0m')
                                 f.write('Logged on.\n')
-                                f.flush()
                                 return True
     return False
 
@@ -109,81 +118,81 @@ else:
     #     if is_there_by_xpath(wd, u'//android.widget.TextView[@text=\'Отчёты\']'):
     #         wd.find_element_by_xpath('//android.widget.TextView[@text=\'Отчёты\']').click()
     # time.sleep(2)
-    if is_there_by_xpath(wd, u'//android.widget.TextView[@text=\'Топ\']'):
+    if is_there_by_xpath(wd, u'//android.widget.TextView[@text=\'Топ\']', False):
         wd.find_element_by_xpath(u'//android.widget.TextView[@text=\'Топ\']').click()
         time.sleep(1)
-        if is_there_by_xpath(wd, u'//android.widget.TextView[@text=\'Топ\']'):
-            if is_there_by_xpath(wd, u'//android.widget.TextView[@text=\'ИЗБРАННОЕ\']'):
+        if is_there_by_xpath(wd, u'//android.widget.TextView[@text=\'Топ\']', False):
+            if is_there_by_xpath(wd, u'//android.widget.TextView[@text=\'ИЗБРАННОЕ\']', False):
                 wd.find_element_by_xpath(u'//android.widget.TextView[@text=\'ИЗБРАННОЕ\']').click()
                 time.sleep(1)
                 profile = User()
-                if is_there(wd, 'ru.gigme.android.app:id/topCircularImage') and is_there(wd, 'ru.gigme.android.app:id/topUserName') \
-                        and is_there(wd, 'ru.gigme.android.app:id/topStatus') and is_there(wd, 'ru.gigme.android.app:id/topRank') \
-                        and is_there(wd, 'ru.gigme.android.app:id/topLikes'):
+                if is_there(wd, 'ru.gigme.android.app:id/topCircularImage', False) and is_there(wd, 'ru.gigme.android.app:id/topUserName', False) \
+                        and is_there(wd, 'ru.gigme.android.app:id/topStatus', False) and is_there(wd, 'ru.gigme.android.app:id/topRank', False) \
+                        and is_there(wd, 'ru.gigme.android.app:id/topLikes', False):
                     profile.name = wd.find_element_by_id('ru.gigme.android.app:id/topUserName').text
                     profile.status = wd.find_element_by_id('ru.gigme.android.app:id/topStatus').text
                     profile.number = wd.find_element_by_id('ru.gigme.android.app:id/topRank').text
                     profile.likes = wd.find_element_by_id('ru.gigme.android.app:id/topLikes').text
-                    if is_there(wd, 'ru.gigme.android.app:id/instagram'):
+                    if is_there(wd, 'ru.gigme.android.app:id/instagram', False):
                         profile.instagram = True
                     wd.find_element_by_id('ru.gigme.android.app:id/topCircularImage').click()
                     time.sleep(2)
-                    if is_there_by_xpath(wd, u'//android.widget.TextView[@text=\'Профиль\']') and is_there(wd, 'ru.gigme.android.app:id/profileAvatar') \
-                            and is_there(wd, 'ru.gigme.android.app:id/profileNameText') and is_there(wd, 'ru.gigme.android.app:id/topPosText')\
-                            and is_there(wd, 'ru.gigme.android.app:id/favoriteButton') and wd.find_element_by_id('ru.gigme.android.app:id/favoriteButton').text == 'В избранном':
+                    if is_there_by_xpath(wd, u'//android.widget.TextView[@text=\'Профиль\']', False) and is_there(wd, 'ru.gigme.android.app:id/profileAvatar', False) \
+                            and is_there(wd, 'ru.gigme.android.app:id/profileNameText', False) and is_there(wd, 'ru.gigme.android.app:id/topPosText', False) \
+                            and is_there(wd, 'ru.gigme.android.app:id/favoriteButton', False) and wd.find_element_by_id('ru.gigme.android.app:id/favoriteButton').text == 'В избранном':
                         current = User()
                         current.name = wd.find_element_by_id('ru.gigme.android.app:id/profileNameText').text
                         current.number = wd.find_element_by_id('ru.gigme.android.app:id/topPosText').text
-                        if is_there(wd, 'ru.gigme.android.app:id/statusText'):
+                        if is_there(wd, 'ru.gigme.android.app:id/statusText', False):
                             current.status = wd.find_element_by_id('ru.gigme.android.app:id/statusText').text
-                        if is_there(wd, 'ru.gigme.android.app:id/action_instagram'):
+                        if is_there(wd, 'ru.gigme.android.app:id/action_instagram', False):
                             current.instagram = True
                         if profile.name == current.name:
                             if current.number in profile.number:
                                 if profile.status == current.status:
                                     if profile.instagram and current.instagram or not (profile.instagram and current.instagram):
-                                        print('User name is %s' %profile.name.encode('utf-8', "replace"))
+                                        print('\x1b[33mUser name is %s\x1b[0m' % profile.name.encode('utf-8', "replace"))
                                         f.write('User name is %s\n' %profile.name.encode('utf-8', "replace"))
                                         f.flush()
-                                        print('User raiting is ' + current.number)
+                                        print('\x1b[33mUser raiting is %s\x1b[0m' % current.number)
                                         f.write('User raiting is ' + current.number + '\n')
                                         f.flush()
-                                        print('User status is %s' %profile.status.encode('utf-8', "replace"))
+                                        print('\x1b[33mUser status is %s\x1b[0m' % profile.status.encode('utf-8', "replace"))
                                         f.write('User status is %s\n' %profile.status.encode('utf-8', "replace"))
                                         f.flush()
                                         if current.instagram:
-                                            print('User has instagram')
+                                            print('\x1b[33mUser has instagram\x1b[0m')
                                             f.write('User has instagram\n')
                                             f.flush()
                                         else:
-                                            print('User jas no instagram')
+                                            print('\x1b[33mUser has no instagram\x1b[0m')
                                             f.write('User jas no instagram\n')
                                             f.flush()
                                         flag = True
                                         wd.quit()
-                                        print('%s success.' % __name__[10:])
+                                        print('\x1b[32m%s success.\x1b[0m' % __name__[10:])
                                         f.write('%s success.\n' % __name__[10:])
                                         f.flush()
                                     else:
-                                        print('Ambiguous information about instagram.')
+                                        print('\x1b[31mAmbiguous information about instagram.\x1b[0m')
                                         f.write('Ambiguous information about instagram.\n')
                                         f.flush()
                                 else:
-                                    print('Current status is %s - status from list %s' % (current.status.encode('utf-8', "replace"), profile.status.encode('utf-8', "replace")))
+                                    print('\x1b[31mCurrent status is %s - status from list %s\x1b[0m'% (current.status.encode('utf-8', "replace"), profile.status.encode('utf-8', "replace")))
                                     f.write('Current status is %s - status from list %s\n' % (current.status.encode('utf-8', "replace"), profile.status.encode('utf-8', "replace")))
                                     f.flush()
                             else:
-                                print('Current number is %s - number from list %s' % (current.number, profile.number))
+                                print('\x1b[31mCurrent number is %s - number from list %s\x1b[0m' % (current.number, profile.number))
                                 f.write('Current number is %s - number from list %s\n' % (current.number, profile.number))
                                 f.flush()
                         else:
-                            print('Current name is %s - name from list %s' % (current.name.encode('utf-8', "replace"), profile.name.encode('utf-8', "replace")))
+                            print('\x1b[31mCurrent name is %s - name from list %s\x1b[0m' % (current.name.encode('utf-8', "replace"), profile.name.encode('utf-8', "replace")))
                             f.write('Current name is %s - name from list %s\n' % (current.name.encode('utf-8', "replace"), profile.name.encode('utf-8', "replace")))
                             f.flush()
 
 if flag is False:
     wd.quit()
-    print('%s failed.' % __name__[10:])
+    print('\x1b[31m%s failed.\x1b[0m' % __name__[10:])
     f.write('%s failed.\n' % __name__[10:])
     f.flush()
 

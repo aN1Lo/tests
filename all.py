@@ -14,7 +14,7 @@ class Profiler(object):
         self._startTime = time.time()
 
     def __exit__(self, type, value, traceback):
-        print("\nElapsed time: {:.3f} min".format((time.time() - self._startTime)/60))
+        print("\x1b[33m\nElapsed time: {:.3f} min.\x1b[0m".format((time.time() - self._startTime)/60))
         f1 = open('C:\\Users\\Adm\\Downloads\\tests\\tests.log', 'a')
         f1.write("\nElapsed time: {:.3f} min.\n".format((time.time() - self._startTime)/60))
         f1.flush()
