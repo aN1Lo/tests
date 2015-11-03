@@ -1,0 +1,95 @@
+Executing all tests.
+
+016_authorization executing...
+Logging of...
+There is //android.widget.ImageButton[@text='']
+There is ru.gigme.android.app:id/material_drawer_account_header_current
+There is //android.widget.TextView[@text='Настройки']
+There is //android.widget.TextView[@text='Мой профиль']
+There is //android.widget.ImageView[@index='0']
+There is ru.gigme.android.app:id/title
+There is //android.widget.ImageButton[@text='']
+Logged off.
+There is //android.widget.TextView[@text='Настройки']
+There is ru.gigme.android.app:id/person_name
+There is ru.gigme.android.app:id/password
+There is ru.gigme.android.app:id/login_button
+There is //android.widget.TextView[@text='Мой профиль']
+There is ru.gigme.android.app:id/profileAvatar
+There is ru.gigme.android.app:id/lastActivityText
+There is ru.gigme.android.app:id/profileNameText
+There is ru.gigme.android.app:id/userLoginText
+There is ru.gigme.android.app:id/favoriteButton
+There is ru.gigme.android.app:id/topPosText
+There is //android.widget.TextView[@text='Место в рейтинге']
+There is ru.gigme.android.app:id/subscribersText
+There is //android.widget.TextView[@text='Подписчиков']
+There is ru.gigme.android.app:id/subscribedText
+There is ru.gigme.android.app:id/favText
+There is ru.gigme.android.app:id/action_status
+There is ru.gigme.android.app:id/action_instagram
+There is ru.gigme.android.app:id/action_album
+Profile information is correct.
+016_authorization success.
+
+017_user_profile executing...
+There is //android.widget.ImageButton[@text='']
+There is ru.gigme.android.app:id/material_drawer_account_header_current
+Already authorized.
+There is //android.widget.TextView[@text='Мой профиль']
+There is ru.gigme.android.app:id/profileAvatar
+There is ru.gigme.android.app:id/lastActivityText
+There is ru.gigme.android.app:id/profileNameText
+There is ru.gigme.android.app:id/userLoginText
+There is ru.gigme.android.app:id/favoriteButton
+There is ru.gigme.android.app:id/topPosText
+There is //android.widget.TextView[@text='Место в рейтинге']
+There is ru.gigme.android.app:id/subscribersText
+There is //android.widget.TextView[@text='Подписчиков']
+There is ru.gigme.android.app:id/subscribedText
+There is ru.gigme.android.app:id/favText
+There is ru.gigme.android.app:id/action_status
+There is ru.gigme.android.app:id/action_instagram
+There is ru.gigme.android.app:id/action_album
+There is //android.widget.TextView[@text='Подписки']
+There is //android.widget.TextView[@text='ПОДПИСЧИКИ']
+There is //android.widget.TextView[@text='ПОДПИСАНА']
+There is ru.gigme.android.app:id/topUserName
+There is //android.widget.ImageButton[@content-desc='Navigate up']
+There is ru.gigme.android.app:id/topUserName
+There is //android.widget.ImageButton[@content-desc='Navigate up']
+There is //android.widget.ImageButton[@content-desc='Navigate up']
+There is //android.widget.TextView[@text='Мой профиль']
+Profile information is correct.
+017_user_profile success.
+
+018_profile_settings executing...
+Authorizating...
+There is //android.widget.ImageButton[@text='']
+There is ru.gigme.android.app:id/material_drawer_account_header_current
+Already authorized.
+There is //android.widget.TextView[@text='Настройки']
+There is //android.widget.TextView[@text='Мой профиль']
+There is ru.gigme.android.app:id/favoriteButton
+There is //android.widget.TextView[@text='Настройки']
+There is ru.gigme.android.app:id/regDateText
+There is ru.gigme.android.app:id/firstNameText
+There is ru.gigme.android.app:id/lastNameText
+There is ru.gigme.android.app:id/birthdayText
+There is ru.gigme.android.app:id/phoneText
+There is ru.gigme.android.app:id/changePassButton
+There is ru.gigme.android.app:id/date_picker
+There is android:id/date_picker_month
+There is android:id/date_picker_day
+There is android:id/date_picker_year
+There is android:id/button1
+Error: There is no //android.widget.CheckBox[@checked='false']
+There is //android.widget.CheckBox[@checked='true']
+There is ru.gigme.android.app:id/alertTitle
+There is ru.gigme.android.app:id/message
+There is ru.gigme.android.app:id/annotation
+There is android:id/button1
+There is //android.widget.ImageButton[@content-desc='Navigate up']
+018_profile_settings success.
+
+Elapsed time: 1.759 min.
